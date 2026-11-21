@@ -14,7 +14,6 @@ Open the [policy workbench](./prototype/). Add a public policy source and fictio
 - Local clause retrieval with ambiguity and abstention handling
 - Ten selectable normal, edge, and instruction-injection evaluation cases
 - Prompt generation, manual model-response entry, and structured JSON run export
-- Ten planned model evaluation cases
 - Twelve local functional checks; these are not LLM evaluation runs
 - Dated policy source notes
 

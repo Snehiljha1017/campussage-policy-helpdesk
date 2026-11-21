@@ -1,6 +1,7 @@
-# Public copy safety
+# Keep credentials and team-specific submission materials out of public source
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 secrets.*
@@ -8,3 +9,6 @@ secrets.*
 **/*Submission*.pdf
 **/M2_*.pdf
 **/AgenticMinds_Synopsis.pdf
+tmp/
+__pycache__/
+*.py[cod]
