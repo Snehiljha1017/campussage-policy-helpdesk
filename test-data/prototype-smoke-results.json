@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "name": "75% attendance question retrieves Section 10(ii)",
+      "result": "PASS"
+    },
+    {
+      "name": "medical leave question retrieves Section 10(iii)",
+      "result": "PASS"
+    },
+    {
+      "name": "unprovided hostel refund policy is not fabricated",
+      "result": "PASS"
+    },
+    {
+      "name": "year-specific current-policy question receives source-date guardrail",
+      "result": "PASS"
+    },
+    {
+      "name": "prompt contains evidence-as-data instruction",
+      "result": "PASS"
+    }
+  ],
+  "passed": 5,
+  "failed": 0
+}
