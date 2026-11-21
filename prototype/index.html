@@ -51,7 +51,7 @@ Section 10(v)(c): A special personal reason requires recommendation of the Dean 
     <h2>2 · Ask a policy question</h2>
     <p class="hint">Use made-up questions. Do not enter student IDs, grades, emails, or other personal data.</p>
     <label for="question">Student question</label>
-    <textarea id="question" placeholder="Example: What attendance is required to sit end-semester exams?">What attendance is required to sit end-semester exams?</textarea>
+    <textarea id="question" placeholder="Example: What minimum attendance is required in a course?">What minimum attendance is required in a course?</textarea>
     <div class="actions"><button id="retrieve">Find supporting clause</button></div>
     <div class="status" id="retrieval-status" role="status"></div>
     <label for="evidence">Retrieved evidence</label>
@@ -67,13 +67,13 @@ Section 10(v)(c): A special personal reason requires recommendation of the Dean 
     <textarea id="answer" placeholder="Paste the answer returned by the selected language model."></textarea>
     <div class="actions"><button class="secondary" id="save-run">Save run as JSON</button></div>
     <div class="status" id="save-status" role="status"></div>
-    <div class="notice"><strong>Prototype status:</strong> local retrieval and prompt assembly are implemented. Language-model execution, public hosting, and link permissions must be completed and verified by the team.</div>
+    <div class="notice"><strong>Prototype status:</strong> local retrieval and prompt assembly are implemented. Model execution is manual; no API is connected. This public demo is hosted on GitHub Pages and uses a paraphrased dated fixture.</div>
   </section>
 </main>
 <footer>CampusSage · SCSE4041 Milestone 2 · Example source: Bennett University Examination Manual 2024-25, Section 10. Verify current rules. Uses only text pasted into this page; no data is transmitted or stored unless you download a run record.</footer>
 <script>
 const $ = id => document.getElementById(id);
-const STOP = new Set('what when where who whom why how is are was were the a an to for of in on at do does can could should sit be with from by and must required students student attend attendance exams exam end semester eligibility eligible'.split(' '));
+const STOP = new Set('what when where who whom why how is are was were the a an to for of in on at do does can could should sit be with from by and must required students student end semester eligibility eligible'.split(' '));
 let selected = null;
 function tokens(text) { return (text.toLowerCase().match(/[a-z0-9%]+/g) || []).filter(t => t.length > 1 && !STOP.has(t)); }
 function clauses(text) {
@@ -95,7 +95,7 @@ function findEvidence() {
   }
   selected = { kind:'match', clause:top };
   $('evidence').textContent=`${top.section}: ${top.text}\n\nMatched terms: ${top.hits.join(', ') || 'none'} · Match ${Math.round(top.score*100)}%`;
-  $('retrieval-status').innerHTML=`<span class="badge">Evidence found</span> ${top.section}`;
+  $('retrieval-status').textContent=`Evidence found · ${top.section}`;
 }
 function composePrompt() {
   if (!selected) findEvidence();

@@ -39,6 +39,11 @@ test('75% attendance question retrieves Section 10(ii)', () => {
   const ui = workbench('What minimum attendance does the manual require in a course?');
   assert.match(ui.evidence.textContent, /Section 10\(ii\)/);
 });
+test('default workbench question finds attendance evidence on page load', () => {
+  const ui = workbench('What minimum attendance is required in a course?');
+  assert.match(ui.evidence.textContent, /Section 10\(ii\)/);
+  assert.doesNotMatch(ui['retrieval-status'].textContent, /No question provided/);
+});
 test('medical leave question retrieves Section 10(iii)', () => {
   const ui = workbench('Does medical leave remove the attendance requirement?');
   ui.retrieve.handlers.click();

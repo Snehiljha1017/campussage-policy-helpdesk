@@ -5,6 +5,10 @@
       "result": "PASS"
     },
     {
+      "name": "default workbench question finds attendance evidence on page load",
+      "result": "PASS"
+    },
+    {
       "name": "medical leave question retrieves Section 10(iii)",
       "result": "PASS"
     },
@@ -21,6 +25,6 @@
       "result": "PASS"
     }
   ],
-  "passed": 5,
+  "passed": 6,
   "failed": 0
 }
