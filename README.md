@@ -22,4 +22,4 @@ The bundled policy fixture paraphrases the 2024-25 Examination Manual and may be
 
 ## Deployment
 
-GitHub Pages can serve this repository from the `main` branch and `/ (root)` once enabled in repository settings.
+GitHub Pages is enabled from the `main` branch and `/ (root)`. The live demo link above opens the hosted site.
