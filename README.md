@@ -2,6 +2,8 @@
 
 CampusSage is a student-built prototype that prepares policy-grounded prompts from public policy text. It is a demonstration, not an official university service.
 
+Live demo: https://snehiljha1017.github.io/campussage-policy-helpdesk/
+
 ## Try it
 
 Open the [policy workbench](./prototype/). Add a public policy source and fictional question. Review the matching clause, copy the generated prompt into a model, and inspect the answer before use. The prototype does not connect to a model or send input to a server.
@@ -11,7 +13,7 @@ Open the [policy workbench](./prototype/). Add a public policy source and fictio
 - Three prompt iterations and one final prompt candidate
 - Static prompt workbench with retrieval, no-match and ambiguity guards
 - Ten planned model evaluation cases
-- Five local functional checks; these are not LLM evaluation runs
+- Six local functional checks; these are not LLM evaluation runs
 - Dated policy source notes
 
 ## Limits
