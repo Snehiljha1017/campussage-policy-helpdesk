@@ -11,14 +11,16 @@ Open the [policy workbench](./prototype/). Add a public policy source and fictio
 ## Included
 
 - Three prompt iterations and one final prompt candidate
-- Static prompt workbench with retrieval, no-match and ambiguity guards
+- Local clause retrieval with ambiguity and abstention handling
+- Ten selectable normal, edge, and instruction-injection evaluation cases
+- Prompt generation, manual model-response entry, and structured JSON run export
 - Ten planned model evaluation cases
-- Six local functional checks; these are not LLM evaluation runs
+- Twelve local functional checks; these are not LLM evaluation runs
 - Dated policy source notes
 
 ## Limits
 
-The bundled policy fixture paraphrases the 2024-25 Examination Manual and may be out of date. It is not verbatim policy text and does not establish current rules. Do not enter personal information or use this prototype to decide an individual student's eligibility. No model evaluation outputs have been recorded yet.
+The bundled policy fixture paraphrases the 2024-25 Examination Manual and may be out of date. It is not verbatim policy text and does not establish current rules. Do not enter personal information or use this prototype to decide an individual student's eligibility. The prototype makes no model call. No model evaluation outputs have been recorded yet; the twelve checks are local code checks only.
 
 ## Deployment
 

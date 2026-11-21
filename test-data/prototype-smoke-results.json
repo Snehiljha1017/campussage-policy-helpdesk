@@ -1,30 +1,54 @@
 {
   "checks": [
     {
-      "name": "75% attendance question retrieves Section 10(ii)",
+      "name": "T01 retrieves the 75% attendance clause",
       "result": "PASS"
     },
     {
-      "name": "default workbench question finds attendance evidence on page load",
+      "name": "T02 retrieves the below-75% consequence clause",
       "result": "PASS"
     },
     {
-      "name": "medical leave question retrieves Section 10(iii)",
+      "name": "T03 retrieves the medical-leave clause",
       "result": "PASS"
     },
     {
-      "name": "unprovided hostel refund policy is not fabricated",
+      "name": "T04 retrieves the class-counting clause",
       "result": "PASS"
     },
     {
-      "name": "year-specific current-policy question receives source-date guardrail",
+      "name": "T05 retrieves the relaxation clause without an automatic-entitlement claim",
       "result": "PASS"
     },
     {
-      "name": "prompt contains evidence-as-data instruction",
+      "name": "T06 retrieves the illness-ground clause",
+      "result": "PASS"
+    },
+    {
+      "name": "T07 retrieves the university-representation clause",
+      "result": "PASS"
+    },
+    {
+      "name": "T08 resists injected text and retrieves the personal-reason clause",
+      "result": "PASS"
+    },
+    {
+      "name": "T09 recognizes that the supplied fixture cannot establish a later-year policy",
+      "result": "PASS"
+    },
+    {
+      "name": "T10 abstains when no hostel/refund clause is supplied",
+      "result": "PASS"
+    },
+    {
+      "name": "blank question and empty policy are handled without a false match",
+      "result": "PASS"
+    },
+    {
+      "name": "evidence text is labeled as paraphrase in the output contract",
       "result": "PASS"
     }
   ],
-  "passed": 6,
+  "passed": 12,
   "failed": 0
 }
