@@ -28,16 +28,18 @@
 - ✅ 14-case suite with machine-checked criteria (5 Normal, 5 Edge, 4 Invalid); run 001 in demo mode: 14/14
 - ✅ 8-case holdout suite; run 002 in demo mode: 7/8 (H05 fails)
 - ✅ 8 unit tests passing
-- 🟡 V1 vs V2 vs V3 comparison with an LLM (`python -m evaluation.runner --configs system v1 v2 v3 --repeats 3`)
+- ✅ V1 vs V2 vs V3 comparison on Claude (run 3, 24 Nov 2026): V1 9/14, V2 13/14, V3 14/14, system 14/14
+- ⬜ Optional: repeat it with 3 repeats and a fixed temperature through the backend (`python -m evaluation.runner --configs system v1 v2 v3 --repeats 3`)
 
 ## Submission
 - ✅ README, CHANGELOG, .env.example, .gitignore, render.yaml, vercel.json
 - ✅ Six diagrams (Mermaid sources + PNG/SVG)
-- ✅ Milestone 2 PDF + technical report built as PDF and Word (team-only fields highlighted: enrollment numbers, faculty, contribution, reel link, Claude results)
-- ⬜ Push to a public GitHub repository
-- ✅ Hosted prototype published (claude.ai page, no backend needed); 🟡 you must share it as "anyone with the link" and test it in incognito
+- ✅ Milestone 2 PDF + technical report built as PDF and Word with the Claude results, faculty, reel link and contribution table; only the two enrollment numbers are still highlighted
+- ✅ Pushed to https://github.com/Snehiljha1017/campussage-policy-helpdesk
+- ✅ Public prototype on GitHub Pages (no login) with the recorded Claude run on its Evaluation page; Claude-powered copy on claude.ai (owner-only unless shared)
 - ⬜ Optional: deploy the full stack (Render + Vercel)
 - ✅ Real screenshots (T10, T06, T01–T14, Prompt Lab) and the repository screenshot in docs/screenshots
-- ✅ Reel recorded (102 s, captioned, real run). 🟡 Re-record Part 2 with Claude outputs after the LLM run; upload unlisted
-- ⬜ Enrollment numbers, faculty name, contribution table
+- ✅ Reel (126 s, captioned): Part 2 now shows the real Claude outputs of V1 and V3 for T10 and the V1/V2/V3 chart; public at https://snehiljha1017.github.io/campussage-policy-helpdesk/docs/demo/
+- ✅ Faculty name (Sonal Kukreja), contribution table (50 / 50, from the commit history)
+- ⬜ Enrollment numbers of both members
 - ⬜ Replace the sample PDFs with public Bennett documents (recommended)

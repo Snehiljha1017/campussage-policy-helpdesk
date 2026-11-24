@@ -1,23 +1,113 @@
 {
   "_comment": "Team-only facts used by scripts/build_m2_docs.py. Values starting with 'TO FILL' are printed highlighted in yellow. Edit, then run: python scripts/build_m2_docs.py",
-  "faculty_name": "TO FILL: faculty name",
+  "faculty_name": "Sonal Kukreja",
   "members": [
-    {"name": "Snehil Jha", "enrollment": "TO FILL: S24CSEU____", "leader": true,
-     "role": "TO FILL: role", "tasks": "TO FILL: specific tasks done in Milestone 2", "evidence": "TO FILL: files / commits / prompt IDs", "percent": "TO FILL"},
-    {"name": "Tanya Sinha", "enrollment": "TO FILL: S24CSEU____", "leader": false,
-     "role": "TO FILL: role", "tasks": "TO FILL: specific tasks done in Milestone 2", "evidence": "TO FILL: e.g. 6 commits on 21-22 Nov 2026 (tanya385)", "percent": "TO FILL"}
+    {
+      "name": "Snehil Jha",
+      "enrollment": "TO FILL: S24CSEU____",
+      "leader": true,
+      "role": "Team leader: application, prompts and evaluation",
+      "tasks": "Replaced the M1 workbench with the full CampusSage app (FastAPI + React + hosted build); prompt versions V1-V3; 22-test suite with automated metrics; live Claude comparison (run 3); M2 documents, screenshots and reel",
+      "evidence": "Commits dd1201d, 108b326, f9a1609, a22c4e7 and the final M2 commit (24 Nov 2026); prompts/v1-v3; test-data/evaluation_results/ (runs 1-3)",
+      "percent": "50"
+    },
+    {
+      "name": "Tanya Sinha",
+      "enrollment": "TO FILL: S24CSEU____",
+      "leader": false,
+      "role": "Policy sources, first prototype and deployment checks",
+      "tasks": "Published the first public-safe prototype and test plan; fixed default policy-question retrieval; documented the live Pages demo and six functional checks; upgraded the policy workbench; collected the policy sources",
+      "evidence": "6 commits by tanya385 on 21-22 Nov 2026 (2295ac1 to 04ea202); docs/policy_sources.md; test-data/test-plan.csv",
+      "percent": "50"
+    }
   ],
   "batch": "B01 - B12",
   "prototype_link": "https://snehiljha1017.github.io/campussage-policy-helpdesk/",
   "prototype_link_llm": "https://claude.ai/artifact/WTt2vSvfwz1VMsun82qr21",
   "repository_link": "https://github.com/Snehiljha1017/campussage-policy-helpdesk",
-  "reel_link": "TO FILL: reel link (Drive 'anyone with the link' or unlisted YouTube)",
+  "reel_link": "https://snehiljha1017.github.io/campussage-policy-helpdesk/docs/demo/",
   "model": "Claude (via claude.ai) in the CampusSage web app",
-  "llm_results": null,
+  "llm_results": {
+    "run": "Run 3, Claude via claude.ai (hosted CampusSage page), main suite T01-T14, 1 repeat, 24 Nov 2026",
+    "source": "test-data/evaluation_results/claude_ai/run003_main_claude-ai_20261124-155920_table.md",
+    "passed": {
+      "system": "14/14",
+      "v1": "9/14",
+      "v2": "13/14",
+      "v3": "14/14"
+    },
+    "metrics": {
+      "system": {
+        "pass_rate": 1.0,
+        "status_accuracy": 1.0,
+        "factual_correctness": 1.0,
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "policy_grounding": 1.0,
+        "format_compliance": 1.0
+      },
+      "v1": {
+        "pass_rate": 0.64,
+        "status_accuracy": 0.86,
+        "factual_correctness": 1.0,
+        "citation_accuracy": 0.5,
+        "hallucination_rate": 0.29,
+        "policy_grounding": 0.6,
+        "format_compliance": 0.07
+      },
+      "v2": {
+        "pass_rate": 0.93,
+        "status_accuracy": 0.93,
+        "factual_correctness": 1.0,
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "policy_grounding": 1.0,
+        "format_compliance": 1.0
+      },
+      "v3": {
+        "pass_rate": 1.0,
+        "status_accuracy": 1.0,
+        "factual_correctness": 1.0,
+        "citation_accuracy": 1.0,
+        "hallucination_rate": 0.0,
+        "policy_grounding": 1.0,
+        "format_compliance": 1.0
+      }
+    },
+    "observations": {
+      "v1": "9/14 passed. With no Status field the app had to infer the status (format compliance 7%). V1 answered the ambiguous T06 instead of asking, answered T10 instead of reporting Conflicting Evidence (in the Prompt Lab it decided by itself which rate applies), and named offices that appear in no document (International Relations Office in T08, Student Affairs Office in T12). Its quotations did not match the expected clause in T01, T02, T09 and T10.",
+      "v2": "13/14 passed; citation accuracy and format compliance rose to 100% and hallucination fell to 0%. It still failed T10: it assumed the 2026 notice replaced the old rate ('depends on which semester') although the excerpts do not say so. It also answered the Hinglish T09 in Hinglish; the automated check passed it, although the expected output asks for English.",
+      "v3": "14/14 passed, every metric 100%, hallucination 0%. T10 is reported as Conflicting Evidence with both clauses quoted and verified, T06 gets one clarifying question, and T09 is answered in English.",
+      "system": "14/14 passed: V3 plus the deterministic guards and citation checks, the configuration students use.",
+      "v2_problems": "V2 had no rule for contradicting sources (in the live run it resolved T10 itself, assuming the newer notice replaced the old rate), no language rule (it answered the Hinglish T09 in Hinglish), and no rules for injected instructions or false assumptions; its confidence was not tied to evidence"
+    },
+    "sample_run": {
+      "input": "test T10, \"How much is the late fee if I pay my semester fee after the due date?\", prompt V3, Claude via claude.ai, Prompt Lab, 24 Nov 2026",
+      "output": "Answer:\nThe excerpts give two different late fee amounts: Rs. 500 per week (capped at Rs. 5,000) in the Fee Regulations, and Rs. 1,000 per week from the odd semester of 2026 in General Notice GN/2026/014. The excerpts do not say whether the notice replaces the Fee Regulations rate or how it affects the maximum, so I can't pick one. Please confirm with the Accounts/Fee Office.\n\nSupporting Evidence:\n\"Fees paid after the due date attract a late fee of Rs. 500 per week of delay, subject to a maximum of Rs. 5,000.\"\n\"With effect from the odd semester of 2026, fees paid after the due date will attract a late fee of Rs. 1,000 per week of delay.\"\n\nSource:\nFee Regulations (Sample), Section 2.1\nGeneral Notice GN/2026/014 (Sample), Section 1.1\n\nConfidence:\nMedium\n\nStatus:\nConflicting Evidence",
+      "v1_output": "**Answer:** The late fee depends on when you pay. For the odd semester of 2026 onward, it is Rs. 1,000 per week of delay (GN/2026/014). Before that, it was Rs. 500 per week, capped at Rs. 5,000. The excerpts do not say whether the Rs. 5,000 cap still applies under the revised rate. Please also note that the due dates are 31 July (odd semester) and 31 December (even semester).\n\n**Source clause:**\n- Revised rate: \"With effect from the odd semester of 2026, fees paid after the due date will attract a late fee of Rs. 1,000 per week of delay.\"\n- Earlier rate: \"Late fee of Rs. 500 per week of delay, subject to a maximum of Rs. 5,000.\"\n- Due dates: E1.\n\n**Section:** General Notice GN/2026/014, Section 1.1 (Revised Late Fee); Fee Regulations, Section 2.1 (Late Payment); Fee Regulations, Section 1.2 (Payment Schedule).\n\n**Confidence:** Low. The excerpts do not state whether the Rs. 5,000 maximum carries over to the new rate, and I don't know which semester you are asking about. Which semester's fee are you paying, and if it is for 2026 or later, please contact the Accounts/Fee Office to confirm whether a maximum applies."
+    }
+  },
   "_llm_results_format": {
     "run": "e.g. Run 5, Claude via claude.ai, main suite, 3 repeats, 2026-11-25",
-    "metrics": {"v1": {"pass_rate": 0.0, "status_accuracy": 0.0, "factual_correctness": 0.0, "citation_accuracy": 0.0, "hallucination_rate": 0.0, "format_compliance": 0.0, "consistency": 0.0}},
-    "observations": {"v1": "what you saw", "v2": "", "v3": ""},
-    "sample_run": {"input": "T10 question", "output": "raw model output text"}
+    "metrics": {
+      "v1": {
+        "pass_rate": 0.0,
+        "status_accuracy": 0.0,
+        "factual_correctness": 0.0,
+        "citation_accuracy": 0.0,
+        "hallucination_rate": 0.0,
+        "format_compliance": 0.0,
+        "consistency": 0.0
+      }
+    },
+    "observations": {
+      "v1": "what you saw",
+      "v2": "",
+      "v3": ""
+    },
+    "sample_run": {
+      "input": "T10 question",
+      "output": "raw model output text"
+    }
   }
 }

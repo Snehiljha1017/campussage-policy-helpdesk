@@ -58,6 +58,10 @@ def latest_run(suite: str) -> dict:
 
 
 MAIN, HOLD = latest_run("main"), latest_run("holdout")
+# Live LLM run recorded in the claude.ai copy (imported by scripts/import_claude_run.py).
+_claude = sorted((ROOT / "test-data" / "evaluation_results" / "claude_ai").glob("run*_main_*.json"))
+CLAUDE = json.loads(_claude[-1].read_text(encoding="utf-8")) if _claude else {}
+CONFIG_LABEL = {"system": "System (V3 + guards)", "v1": "V1 prompt", "v2": "V2 prompt", "v3": "V3 prompt"}
 CASES = {c["id"]: c for f in ("test_cases.json", "holdout_cases.json")
          for c in json.loads((ROOT / "test-data" / "inputs" / f).read_text(encoding="utf-8"))["cases"]}
 
@@ -130,6 +134,10 @@ def design() -> str:
     v3 = PROMPTS["v3"]
     sample = (f"Input ({LLM['sample_run']['input']}):\n\n" + code(LLM["sample_run"]["output"])) if LLM and LLM.get("sample_run") else \
         f"[TO FILL after the Claude run: one real input (e.g. test T10) and the model's raw output, copied from the Prompt Lab or chat]{{.mark}}"
+    if LLM and LLM.get("sample_run", {}).get("v1_output"):
+        sample += ("\nFor comparison, the same input and excerpts with **V1** (the Milestone 1 baseline). It has no Status field, "
+                   "so the app had to infer \"Answered\", and it decides by itself which rate applies instead of reporting the conflict:\n\n"
+                   + code(LLM["sample_run"]["v1_output"]))
     return f"""# 2 Prompt and solution design
 
 ## (a) Design summary
@@ -296,6 +304,7 @@ The main-suite score overstates generalisation, because the thresholds were tune
 {img('docs/screenshots/T06_clarification_then_answer.png', 'Screenshot 2 — Test T06: one clarifying question, then the follow-up answered from Fee Regulations §1.2', '82%')}
 {img('docs/screenshots/T01-T14_evaluation_run.png', 'Screenshot 3 — Tests T01–T14: the test suite run inside the deployed app')}
 
+{claude_section()}
 ## Known limitations and what we will try next
 
 1. **Hinglish outside the built-in vocabulary (holdout H05 failed).** The keyword evidence check does not know words like
@@ -309,6 +318,58 @@ The main-suite score overstates generalisation, because the thresholds were tune
 4. **No OCR and no document dates.** Scanned notices are rejected, and a newer notice cannot yet be shown as superseding
    an older clause. In demo mode, conflicts are only detected between money amounts. Next: an OCR fallback and document
    effective dates.
+5. **One live run, temperature not under our control.** The Claude comparison (run 3) has one repeat, so consistency was
+   not measured, and the claude.ai runtime does not let the page set a temperature, so V2's 0.2 and V3's 0 were not
+   applied. Outputs do vary: V1's answer to T10 in the Prompt Lab differed from its answer in run 3. The automated check
+   also passed V2's Hinglish reply to T09 although the expected output asks for English. Next: 3 repeats through the
+   backend with a fixed temperature, and a language check in the test criteria.
+"""
+
+
+def claude_section() -> str:
+    if not CLAUDE:
+        return ""
+    cfgs = CLAUDE["run"]["configs"]
+    by = {(r["Config"], r["Test ID"]): r for r in CLAUDE["results"]}
+    tests = [r for r in CLAUDE["results"] if r["Config"] == cfgs[0]]
+
+    def cell(r: dict) -> str:
+        if r["Pass/Fail"] == "Pass":
+            return "Pass"
+        why = r["Failure Reasons"].replace("expected clause not among verified citations", "quoted the wrong clause") \
+            .replace("status 'Answered', expected Needs Clarification", "answered instead of asking") \
+            .replace("status 'Answered', expected Conflicting Evidence", "answered instead of reporting the conflict")
+        return f"**Fail** ({esc(why)})"
+
+    rows_ = "\n".join(f"| {t['Test ID']} | {t['Type']} | {short(t['Input'], 60)} | " +
+                      " | ".join(cell(by[(c, t['Test ID'])]) for c in cfgs) + " |" for t in tests)
+    s = CLAUDE["summary"]["configs"]
+    passed = " | ".join(f"**{s[c]['passed']}/{s[c]['tests']}**" for c in cfgs)
+    names = {"pass_rate": "Pass rate", "status_accuracy": "Status accuracy", "factual_correctness": "Factual correctness",
+             "citation_accuracy": "Citation accuracy", "hallucination_rate": "Hallucination rate (lower is better)",
+             "policy_grounding": "Policy grounding", "format_compliance": "Format compliance"}
+    mrows = "\n".join(f"| {label} | " + " | ".join(pct(s[c]['metrics'].get(k)) for c in cfgs) + " |" for k, label in names.items())
+    head = " | ".join(CONFIG_LABEL.get(c, c) for c in cfgs)
+    run = CLAUDE["run"]
+    return f"""## Live run with Claude: V1 vs V2 vs V3 (run {run['id']})
+
+Run {run['id']} used **{run['model']}** in the hosted CampusSage page on {run['started_at'][:10]}: the {len(tests)} main
+tests, {len(cfgs)} configurations, {run['repeats']} repeat, {len(CLAUDE['results'])} model outputs. V1–V3 are the prompts on
+their own with identical retrieval, so only the prompt differs; System is V3 with the guards and citation checks, as
+students use it. Pass/fail is decided by the same code as in demo mode. The exported table is in
+`{CLAUDE.get('source', 'test-data/evaluation_results/claude_ai/')}`, and the public prototype's Evaluation page shows this run.
+
+| Metric | {head} |
+|---|---|---|---|---|
+{mrows}
+
+| Test | Type | Input (short) | {head} |
+|--|--|------|----|----|----|----|
+{rows_}
+| | | **Passed** | {passed} |
+
+{img('docs/screenshots/claude_run3_v1_v2_v3_chart.png', 'Screenshot 4 — Run 3 on Claude: pass rate, citation accuracy, format compliance and hallucination rate per configuration (Evaluation page of the deployed app)', '70%')}
+{img('docs/screenshots/T10_v1_vs_v3_claude.png', 'Screenshot 5 — Test T10 on Claude in the Prompt Lab: V1 (top) decides by itself and has no Status field; V3 (bottom) reports Conflicting Evidence with both quotations verified', '78%')}
 """
 
 
@@ -325,7 +386,8 @@ What changed since Milestone 1:
 - Saved V1 (the Milestone 1 baseline), V2 and V3 of prompt P1 as separate files in `prompts/`, each with the reasons for its changes.
 - Added deterministic guards, citation validation and an evidence-capped confidence around the LLM.
 - Added {N_TESTS} test inputs with machine-checked criteria, automated metrics, CSV/JSON exports and 8 unit tests.
-- Dated entries in `CHANGELOG.md`; diagrams, screenshots and the Milestone 2 documents in `docs/`.
+- Ran V1, V2 and V3 live on Claude (run 3, imported with `scripts/import_claude_run.py`); the public prototype's Evaluation page shows it.
+- Dated entries in `CHANGELOG.md`; diagrams, screenshots, the demonstration reel (`docs/demo/`) and the Milestone 2 documents in `docs/`.
 """
 
 
@@ -333,7 +395,8 @@ def tech_report_body() -> str:
     llm_rows = ""
     if LLM:
         for v, m in LLM["metrics"].items():
-            llm_rows += f"| {v}, Claude | {pct(m.get('pass_rate'))} | {pct(m.get('status_accuracy'))} | {pct(m.get('citation_accuracy'))} | {pct(m.get('hallucination_rate'))} | {pct(m.get('format_compliance'))} |\n"
+            passed = LLM.get("passed", {}).get(v) or pct(m.get("pass_rate"))
+            llm_rows += f"| {CONFIG_LABEL.get(v, v)}, main, Claude | {passed} | {pct(m.get('status_accuracy'))} | {pct(m.get('citation_accuracy'))} | {pct(m.get('hallucination_rate'))} | {pct(m.get('format_compliance'))} |\n"
     else:
         llm_rows = f"| V1, V2, V3 with Claude | [TO FILL after the Claude run]{{.mark}} | | | | |\n"
     sm, sh = SM.get("metrics", {}), SH.get("metrics", {})
@@ -368,7 +431,8 @@ confidence rubric, silent 7-step procedure with a self-check, 2 few-shot example
 
 ## 4. Test results
 {N_TESTS} inputs ({N_EDGE} edge/invalid) with pass criteria checked by code. H01–H08 were written after tuning and never
-used to tune.
+used to tune. The prompt comparison is a live Claude run (claude.ai, 24 Nov 2026, 1 repeat) with identical retrieval for
+every version.
 
 | Configuration | Pass | Status acc. | Citation acc. | Hallucination | Format |
 |---|---|---|---|---|---|
@@ -379,10 +443,11 @@ Eight unit tests check the code around the model using a stand-in model: a fabri
 detected, and the answer is withheld.
 
 ## 5. Limitations
-Four known limits. First, Hinglish words outside the built-in vocabulary defeat the keyword evidence check (holdout H05 failed). Second, thresholds
+Five known limits. First, Hinglish words outside the built-in vocabulary defeat the keyword evidence check (holdout H05 failed). Second, thresholds
 were tuned on the main suite, so the holdout score is the fairer estimate. Third, the documents are labelled samples, not
-official policy. Fourth, there is no OCR and no document dating. Next: LLM query rewriting, a separate development set,
-Bennett's public documents, OCR and document versioning.
+official policy. Fourth, there is no OCR and no document dating. Fifth, the Claude comparison is one run, and claude.ai
+does not let the page set a temperature. Next: LLM query rewriting, a separate development set, repeated runs at a fixed
+temperature, Bennett's public documents, OCR and document versioning.
 """
 
 

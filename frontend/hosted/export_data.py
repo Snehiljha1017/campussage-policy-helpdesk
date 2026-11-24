@@ -45,7 +45,16 @@ for suite in ("main", "holdout"):
     if files:
         run = json.loads(files[-1].read_text(encoding="utf-8"))
         data["imported_runs"].append({"file": f"test-data/evaluation_results/{files[-1].name}", "run": run["run"],
-                                      "summary": run["summary"], "results": run["results"]})
+                                      "summary": run["summary"], "results": run["results"], "mode": "demo (backend)",
+                                      "note": f"Recorded by the Python backend: test-data/evaluation_results/{files[-1].name}"})
+# Live LLM runs recorded in the claude.ai copy (imported with scripts/import_claude_run.py), so the public copy,
+# which cannot call a model itself, still shows the real V1/V2/V3 comparison.
+for p in sorted((res_dir / "claude_ai").glob("run*.json")):
+    run = json.loads(p.read_text(encoding="utf-8"))
+    data["imported_runs"].append({"file": f"test-data/evaluation_results/claude_ai/{p.name}", "run": run["run"],
+                                  "summary": run["summary"], "results": run["results"], "mode": "anthropic (recorded)",
+                                  "note": f"Recorded live with {run['run']['model']} on {run['run']['started_at'][:10]}. "
+                                          f"{run['note']} File: test-data/evaluation_results/claude_ai/{p.name}"})
 out = Path(__file__).with_name("data.generated.json")
 out.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 print("wrote", out.relative_to(ROOT), sum(len(d["chunks"]) for d in docs), "clauses")

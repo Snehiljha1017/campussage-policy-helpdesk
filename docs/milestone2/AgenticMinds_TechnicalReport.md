@@ -31,19 +31,24 @@ confidence rubric, silent 7-step procedure with a self-check, 2 few-shot example
 
 ## 4. Test results
 22 inputs (14 edge/invalid) with pass criteria checked by code. H01–H08 were written after tuning and never
-used to tune.
+used to tune. The prompt comparison is a live Claude run (claude.ai, 24 Nov 2026, 1 repeat) with identical retrieval for
+every version.
 
 | Configuration | Pass | Status acc. | Citation acc. | Hallucination | Format |
 |---|---|---|---|---|---|
 | System, main suite, demo mode | 14/14 | 100% | 100% | 0% | 100% |
 | System, holdout, demo mode | 7/8 | 88% | 80% | 0% | 100% |
-| V1, V2, V3 with Claude | [TO FILL after the Claude run]{.mark} | | | | |
+| System (V3 + guards), main, Claude | 14/14 | 100% | 100% | 0% | 100% |
+| V1 prompt, main, Claude | 9/14 | 86% | 50% | 29% | 7% |
+| V2 prompt, main, Claude | 13/14 | 93% | 100% | 0% | 100% |
+| V3 prompt, main, Claude | 14/14 | 100% | 100% | 0% | 100% |
 
 Eight unit tests check the code around the model using a stand-in model: a fabricated quotation and an invented "60%" are
 detected, and the answer is withheld.
 
 ## 5. Limitations
-Four known limits. First, Hinglish words outside the built-in vocabulary defeat the keyword evidence check (holdout H05 failed). Second, thresholds
+Five known limits. First, Hinglish words outside the built-in vocabulary defeat the keyword evidence check (holdout H05 failed). Second, thresholds
 were tuned on the main suite, so the holdout score is the fairer estimate. Third, the documents are labelled samples, not
-official policy. Fourth, there is no OCR and no document dating. Next: LLM query rewriting, a separate development set,
-Bennett's public documents, OCR and document versioning.
+official policy. Fourth, there is no OCR and no document dating. Fifth, the Claude comparison is one run, and claude.ai
+does not let the page set a temperature. Next: LLM query rewriting, a separate development set, repeated runs at a fixed
+temperature, Bennett's public documents, OCR and document versioning.

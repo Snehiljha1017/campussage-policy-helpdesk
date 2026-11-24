@@ -1,0 +1,92 @@
+[
+ {
+  "part": "1  Problem",
+  "text": "Bennett students hunt through long policy PDFs and notices for rules on attendance, exams, fees and hostel, and seniors give different answers.",
+  "start": 0.739,
+  "end": 6.24
+ },
+ {
+  "part": "1  Problem",
+  "text": "CampusSage answers only from the official policy documents and quotes the exact clause and section, or says the policy does not cover it.",
+  "start": 6.24,
+  "end": 12.362
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "Old prompt V1 (our Milestone 1 baseline): one user message, four rules, no status field, only High/Low confidence.",
+  "start": 12.362,
+  "end": 20.98
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "Improved prompt V3: exact quotes, section from the excerpt header, rules for contradictions, injection and Hinglish, a confidence rubric, a self-check and 2 examples.",
+  "start": 20.98,
+  "end": 32.501
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "Same question, same retrieved clauses for every version: only the prompt changes. The Evaluation page measures each version on the full test set.",
+  "start": 32.501,
+  "end": 40.588
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "Real Claude output for test T10. Old prompt V1 decides by itself which late fee applies and has no Status field, so the app must guess it.",
+  "start": 40.588,
+  "end": 48.588
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "Improved prompt V3, same question and excerpts: Claude reports Conflicting Evidence and quotes both clauses, each verified word for word.",
+  "start": 48.588,
+  "end": 56.588
+ },
+ {
+  "part": "2  Prompt experiment",
+  "text": "All 14 tests on Claude: pass rate V1 64% → V2 93% → V3 100%; citation accuracy 50% → 100%; hallucination 29% → 0%.",
+  "start": 56.588,
+  "end": 64.588
+ },
+ {
+  "part": "3  Working demo",
+  "text": "Test T01: a normal attendance question. The answer quotes Attendance Policy Section 2.1, verified word for word against the document.",
+  "start": 64.588,
+  "end": 75.9
+ },
+ {
+  "part": "3  Working demo",
+  "text": "Test T10: two documents disagree on the late fee. CampusSage reports Conflicting Evidence and quotes both clauses instead of picking one.",
+  "start": 75.9,
+  "end": 86.163
+ },
+ {
+  "part": "3  Working demo",
+  "text": "Test T06: a vague question gets one clarifying question. The reply \"fee payment\" is then answered from Fee Regulations Section 1.2.",
+  "start": 86.163,
+  "end": 95.741
+ },
+ {
+  "part": "3  Working demo",
+  "text": "Test T08: the policies do not cover exchange programmes, so CampusSage says so and names the office to contact instead of guessing.",
+  "start": 95.741,
+  "end": 102.612
+ },
+ {
+  "part": "3  Working demo",
+  "text": "Policy library: a new PDF is uploaded, split into numbered clauses and indexed in seconds, ready to be cited.",
+  "start": 102.612,
+  "end": 112.023
+ },
+ {
+  "part": "4  Progress and next steps",
+  "text": "Done: full RAG web app, prompts V1 to V3 compared on Claude (V3 passes 14/14), and 22 tests in demo mode (21 pass; holdout H05 fails).",
+  "start": 112.023,
+  "end": 118.822
+ },
+ {
+  "part": "4  Progress and next steps",
+  "text": "Next for Milestone 3: repeat the Claude runs to measure consistency, add Hinglish query rewriting, and load Bennett public documents with OCR.",
+  "start": 118.822,
+  "end": 126.16
+ }
+]

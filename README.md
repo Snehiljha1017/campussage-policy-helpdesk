@@ -12,10 +12,11 @@ each other.
 | Team | **Agentic Minds** · Team ID **PE-B01-18** · Batch group B01 – B12 |
 | Members | Snehil Jha (team leader), Tanya Sinha |
 | Problem source | Problem Pool, **C1** |
-| Live demo (public, no login) | https://snehiljha1017.github.io/campussage-policy-helpdesk/: the full app in demo mode (no model call) |
+| Live demo (public, no login) | https://snehiljha1017.github.io/campussage-policy-helpdesk/: the full app in demo mode (no model call); its Evaluation page includes the recorded live Claude run |
 | Live demo with Claude | https://claude.ai/artifact/WTt2vSvfwz1VMsun82qr21 (claude.ai sign-in; the owner must share it) |
 | Repository | https://github.com/Snehiljha1017/campussage-policy-helpdesk |
-| Reel | `TODO: add Drive / unlisted YouTube link` |
+| Reel (126 s, captioned) | https://snehiljha1017.github.io/campussage-policy-helpdesk/docs/demo/ |
+| Faculty | Sonal Kukreja |
 
 > **About the bundled documents.** `sample-documents/` contains six clearly labelled **SAMPLE** policies, written so
 > the system can be demonstrated and tested end to end. They are **not** official Bennett University policy. Upload
@@ -31,7 +32,8 @@ each other.
 | Supporting document (technical report, 1 page) | `docs/milestone2/AgenticMinds_TechnicalReport.pdf` / `.docx` |
 | Screenshots of real runs, captioned with test numbers | `docs/screenshots/` |
 | Diagrams (prompt workflow, task decomposition, input–output, architecture ×2, RAG pipeline) | `docs/architecture/`, `docs/workflow/` |
-| Reel script (the 102-second reel itself is uploaded separately) | `docs/milestone2/Demo_Reel_Script.md` |
+| Demonstration reel (126 s) and its script | `docs/demo/CampusSage_M2_reel.mp4`, `docs/milestone2/Demo_Reel_Script.md` |
+| Live Claude run 3 (V1 vs V2 vs V3) | `test-data/evaluation_results/claude_ai/` (import: `python scripts/import_claude_run.py <table.md>`) |
 | Rebuild both documents from the repo data | `python scripts/build_m2_docs.py` (team details in `docs/milestone2/m2_inputs.json`) |
 
 ## What is in the box
@@ -126,13 +128,27 @@ model output) and a ready-to-paste Markdown test table. The same runs can be sta
 |---|---|---|---|
 | 001 | demo (no LLM) | main, 14 tests | 14 / 14 passed |
 | 002 | demo (no LLM) | holdout, 8 tests | 7 / 8 passed: H05 Hinglish *"hostel mein raat ko kitne baje tak aana hai?"* wrongly declined |
+| 003 | **Claude** (via claude.ai, hosted page) | main, 14 tests, 1 repeat | system 14/14 · **V1 9/14 · V2 13/14 · V3 14/14** |
 
-Overall: **21 / 22 test inputs passed** (the Milestone 2 test table lists all 22).
+Overall in demo mode: **21 / 22 test inputs passed** (the Milestone 2 test table lists all 22).
+
+Run 3 is the prompt comparison on a real model, with identical retrieval for every version:
+
+| Metric | V1 | V2 | V3 |
+|---|---|---|---|
+| Pass rate | 64% | 93% | 100% |
+| Citation accuracy | 50% | 100% | 100% |
+| Hallucination rate | 29% | 0% | 0% |
+| Format compliance | 7% | 100% | 100% |
+
+V1 answered the ambiguous T06 instead of asking, answered T10 instead of reporting the conflict and named offices that
+appear in no document. V2 fixed the format and citations but still resolved the T10 conflict on its own. V3 passed every
+test. The run has one repeat, and claude.ai does not let the page set a temperature, so V2/V3's temperature settings were
+not applied.
 
 The guard thresholds were tuned while looking at the main suite, so 14/14 overstates how well the system generalises.
-The holdout suite was written afterwards and never used for tuning, which makes it the fairer estimate. **The V1 vs V2
-vs V3 prompt comparison has not been run yet**: it needs an API key. Run the second command above and use its
-output in the Milestone 2 iteration log.
+The holdout suite was written afterwards and never used for tuning, which makes it the fairer estimate. To repeat the prompt
+comparison with a fixed temperature and 3 repeats, run the second command above with an API key.
 
 ## Hosted prototype (no server)
 

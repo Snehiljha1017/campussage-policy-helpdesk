@@ -17,7 +17,9 @@ port of it, so the prototype can be hosted as a single static page with no serve
 | PyMuPDF upload | pdf.js in the browser |
 
 `data.generated.json` holds the sample clauses chunked by the **Python** chunker, the test suites, the prompt files
-and the two recorded backend runs. Regenerate it after changing any of those: `python frontend/hosted/export_data.py`.
+the two recorded backend runs and the live Claude run 3 (`test-data/evaluation_results/claude_ai/`), so even the public
+copy, which cannot call a model, shows the real V1/V2/V3 comparison. Regenerate it after changing any of those:
+`python frontend/hosted/export_data.py`.
 
 **Parity check (2026-11-24):** on all 22 test inputs (14 main + 8 holdout) the TypeScript engine in demo mode gives the
 same status, answer text, top retrieved clause, verified citations and pass/fail as the Python backend, and the same

@@ -2,6 +2,12 @@
 
 All notable changes since Milestone 1. Dates are YYYY-MM-DD.
 
+## 2026-11-24 — Live Claude run, final documents and reel
+- Run 3: V1, V2 and V3 compared on Claude (via claude.ai) on the 14 main tests with identical retrieval. V1 9/14, V2 13/14, V3 14/14, system 14/14 (`test-data/evaluation_results/claude_ai/`).
+- `scripts/import_claude_run.py` converts the exported Markdown table into the backend's JSON format; the public build ships the run, so the GitHub Pages Evaluation page shows it without a model.
+- Milestone 2 PDF: iteration-log results, V1 vs V3 sample run, a live-run section with a per-test V1/V2/V3 table and two new screenshots, a fifth limitation; faculty, reel link and contribution table filled. Technical report: Claude rows.
+- Reel rebuilt (126 s): Part 2 now shows the real V1 and V3 outputs for T10 and the run-3 chart; published in `docs/demo/`.
+
 ## 2026-11-24 — Milestone 2 documents
 - `scripts/build_m2_docs.py` builds the Milestone 2 PDF (7 sections) and the technical report (PDF + Word) from the repository's real data.
 - Screenshots of real runs (T10, T06, T01–T14, Prompt Lab) and a repository screenshot in `docs/screenshots/`.
