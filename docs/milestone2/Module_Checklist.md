@@ -34,12 +34,12 @@
 ## Submission
 - ✅ README, CHANGELOG, .env.example, .gitignore, render.yaml, vercel.json
 - ✅ Six diagrams (Mermaid sources + PNG/SVG)
-- ✅ Milestone 2 PDF + technical report built as PDF and Word with the Claude results, faculty, reel link and contribution table; only the two enrollment numbers are still highlighted
+- ✅ Milestone 2 PDF + technical report built as PDF and Word with the Claude results, faculty, enrollment numbers, reel link and contribution table; nothing left highlighted
 - ✅ Pushed to https://github.com/Snehiljha1017/campussage-policy-helpdesk
 - ✅ Public prototype on GitHub Pages (no login) with the recorded Claude run on its Evaluation page; Claude-powered copy on claude.ai (owner-only unless shared)
 - ⬜ Optional: deploy the full stack (Render + Vercel)
 - ✅ Real screenshots (T10, T06, T01–T14, Prompt Lab) and the repository screenshot in docs/screenshots
 - ✅ Reel (126 s, captioned): Part 2 now shows the real Claude outputs of V1 and V3 for T10 and the V1/V2/V3 chart; public at https://snehiljha1017.github.io/campussage-policy-helpdesk/docs/demo/
 - ✅ Faculty name (Sonal Kukreja), contribution table (50 / 50, from the commit history)
-- ⬜ Enrollment numbers of both members
+- ✅ Enrollment numbers: Snehil Jha S24CSEU0551, Tanya Sinha S24CSEU0583
 - ⬜ Replace the sample PDFs with public Bennett documents (recommended)

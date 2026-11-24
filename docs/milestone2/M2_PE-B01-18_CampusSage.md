@@ -14,8 +14,8 @@
 
 | Member | Enrollment no. |
 |---|---|
-| Snehil Jha (team leader) | [TO FILL: S24CSEU____]{.mark} |
-| Tanya Sinha | [TO FILL: S24CSEU____]{.mark} |
+| Snehil Jha (team leader) | S24CSEU0551 |
+| Tanya Sinha | S24CSEU0583 |
 
 | Link | URL |
 |---|---|
@@ -642,6 +642,6 @@ rewriting, a separate development set, repeated runs at a fixed temperature, Ben
 
 | Member name | Enrollment no. | Role | Tasks done in Milestone 2 | Evidence | Contribution (%) |
 |------|------|-----|-----------|---------|----|
-| Snehil Jha | [TO FILL: S24CSEU____]{.mark} | Team leader: application, prompts and evaluation | Replaced the M1 workbench with the full CampusSage app (FastAPI + React + hosted build); prompt versions V1-V3; 22-test suite with automated metrics; live Claude comparison (run 3); M2 documents, screenshots and reel | Commits dd1201d, 108b326, f9a1609, a22c4e7 and the final M2 commit (24 Nov 2026); prompts/v1-v3; test-data/evaluation_results/ (runs 1-3) | 50 |
-| Tanya Sinha | [TO FILL: S24CSEU____]{.mark} | Policy sources, first prototype and deployment checks | Published the first public-safe prototype and test plan; fixed default policy-question retrieval; documented the live Pages demo and six functional checks; upgraded the policy workbench; collected the policy sources | 6 commits by tanya385 on 21-22 Nov 2026 (2295ac1 to 04ea202); docs/policy_sources.md; test-data/test-plan.csv | 50 |
+| Snehil Jha | S24CSEU0551 | Team leader: application, prompts and evaluation | Replaced the M1 workbench with the full CampusSage app (FastAPI + React + hosted build); prompt versions V1-V3; 22-test suite with automated metrics; live Claude comparison (run 3); M2 documents, screenshots and reel | Commits dd1201d, 108b326, f9a1609, a22c4e7 and the final M2 commit (24 Nov 2026); prompts/v1-v3; test-data/evaluation_results/ (runs 1-3) | 50 |
+| Tanya Sinha | S24CSEU0583 | Policy sources, first prototype and deployment checks | Published the first public-safe prototype and test plan; fixed default policy-question retrieval; documented the live Pages demo and six functional checks; upgraded the policy workbench; collected the policy sources | 6 commits by tanya385 on 21-22 Nov 2026 (2295ac1 to 04ea202); docs/policy_sources.md; test-data/test-plan.csv | 50 |
 | | | | | **Total** | **100** |

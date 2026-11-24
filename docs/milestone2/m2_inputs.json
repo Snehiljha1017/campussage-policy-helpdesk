@@ -4,7 +4,7 @@
   "members": [
     {
       "name": "Snehil Jha",
-      "enrollment": "TO FILL: S24CSEU____",
+      "enrollment": "S24CSEU0551",
       "leader": true,
       "role": "Team leader: application, prompts and evaluation",
       "tasks": "Replaced the M1 workbench with the full CampusSage app (FastAPI + React + hosted build); prompt versions V1-V3; 22-test suite with automated metrics; live Claude comparison (run 3); M2 documents, screenshots and reel",
@@ -13,7 +13,7 @@
     },
     {
       "name": "Tanya Sinha",
-      "enrollment": "TO FILL: S24CSEU____",
+      "enrollment": "S24CSEU0583",
       "leader": false,
       "role": "Policy sources, first prototype and deployment checks",
       "tasks": "Published the first public-safe prototype and test plan; fixed default policy-question retrieval; documented the live Pages demo and six functional checks; upgraded the policy workbench; collected the policy sources",
