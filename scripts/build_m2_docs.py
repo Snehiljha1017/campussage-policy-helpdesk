@@ -211,9 +211,11 @@ All diagrams are drawn from the implemented code (Mermaid sources in `docs/archi
 
 def implementation() -> str:
     llm_ok = bool(LLM)
-    gen = ("Working", "Live run recorded: " + LLM["run"]) if llm_ok else (
+    gen = ("Partly working", "Works with Claude in the claude.ai copy (live run recorded: " + LLM["run"] + "). The public link has no model, "
+           "so there it answers with the labelled extractive fallback") if llm_ok else (
         "Partly working", "Code complete and unit-tested with a stand-in model; the first live Claude run is pending")
-    lab = ("Working", "V1/V2/V3 compared live") if llm_ok else ("Partly working", "Compare needs Claude; without it the lab shows the exact prompts")
+    lab = ("Partly working", "V1/V2/V3 compared live on Claude in the claude.ai copy. On the public link it shows the prompts, editor, "
+           "history and the recorded run, but cannot run a new comparison") if llm_ok else ("Partly working", "Compare needs Claude; without it the lab shows the exact prompts")
     status = [
         ("Document ingestion", "Upload PDF, extract text, split into numbered clauses, index; view, re-index, delete", "Working", "Tested in the backend and in the browser build (pdf.js); no OCR"),
         ("Retrieval and reranking", "TF-IDF word + character n-grams; reranks by key-term coverage and answer type", "Working", "ChromaDB embeddings optional in the backend (not used in tests)"),

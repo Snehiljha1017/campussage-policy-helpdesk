@@ -258,10 +258,10 @@ backend-free build hosted on GitHub Pages and claude.ai. A parity check showed b
 | Document ingestion | Upload PDF, extract text, split into numbered clauses, index; view, re-index, delete | Working | Tested in the backend and in the browser build (pdf.js); no OCR |
 | Retrieval and reranking | TF-IDF word + character n-grams; reranks by key-term coverage and answer type | Working | ChromaDB embeddings optional in the backend (not used in tests) |
 | Question guards | Gibberish, ambiguity, injection, personal-data and evidence checks | Working | T06, T08, T11–T14 and 8 unit tests |
-| Answer generation (LLM) | Prompt P1 via LangChain (backend) or Claude (hosted) | Working | Live run recorded: Run 3, Claude via claude.ai (hosted CampusSage page), main suite T01-T14, 1 repeat, 24 Nov 2026 |
+| Answer generation (LLM) | Prompt P1 via LangChain (backend) or Claude (hosted) | Partly working | Works with Claude in the claude.ai copy (live run recorded: Run 3, Claude via claude.ai (hosted CampusSage page), main suite T01-T14, 1 repeat, 24 Nov 2026). The public link has no model, so there it answers with the labelled extractive fallback |
 | Citation validation and confidence | Verifies quotes, sections and numbers; caps confidence; withholds unverifiable answers | Working | Unit tests reject a fabricated quote and number |
 | Chat interface | Ask, cited answer card, copy, feedback, clarification follow-up, 10-step trace | Working | Screenshots 1–2 |
-| Prompt lab | Compare V1/V2/V3, prompt editor, version history, run log | Working | V1/V2/V3 compared live |
+| Prompt lab | Compare V1/V2/V3, prompt editor, version history, run log | Partly working | V1/V2/V3 compared live on Claude in the claude.ai copy. On the public link it shows the prompts, editor, history and the recorded run, but cannot run a new comparison |
 | Evaluation dashboard | Runs the suites, charts, Normal/Edge/Invalid filter, CSV/Markdown export | Working | Screenshot 3 |
 | Deployment | GitHub Pages (public) and claude.ai (with Claude) | Working | Both links tested on 24 Nov 2026 |
 
