@@ -23,6 +23,17 @@ each other.
 
 ---
 
+## Milestone 2 deliverables (in this repository)
+
+| What | Where |
+|---|---|
+| Milestone 2 PDF (7 sections) + editable Word version | `docs/milestone2/M2_PE-B01-18_CampusSage.pdf` / `.docx` |
+| Supporting document (technical report, 1 page) | `docs/milestone2/AgenticMinds_TechnicalReport.pdf` / `.docx` |
+| Screenshots of real runs, captioned with test numbers | `docs/screenshots/` |
+| Diagrams (prompt workflow, task decomposition, input–output, architecture ×2, RAG pipeline) | `docs/architecture/`, `docs/workflow/` |
+| Reel script (the 102-second reel itself is uploaded separately) | `docs/milestone2/Demo_Reel_Script.md` |
+| Rebuild both documents from the repo data | `python scripts/build_m2_docs.py` (team details in `docs/milestone2/m2_inputs.json`) |
+
 ## What is in the box
 
 | Page | What it does |
@@ -115,6 +126,8 @@ model output) and a ready-to-paste Markdown test table. The same runs can be sta
 |---|---|---|---|
 | 001 | demo (no LLM) | main, 14 tests | 14 / 14 passed |
 | 002 | demo (no LLM) | holdout, 8 tests | 7 / 8 passed: H05 Hinglish *"hostel mein raat ko kitne baje tak aana hai?"* wrongly declined |
+
+Overall: **21 / 22 test inputs passed** (the Milestone 2 test table lists all 22).
 
 The guard thresholds were tuned while looking at the main suite, so 14/14 overstates how well the system generalises.
 The holdout suite was written afterwards and never used for tuning, which makes it the fairer estimate. **The V1 vs V2

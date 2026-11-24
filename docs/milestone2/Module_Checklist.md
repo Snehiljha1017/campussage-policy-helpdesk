@@ -33,11 +33,11 @@
 ## Submission
 - ✅ README, CHANGELOG, .env.example, .gitignore, render.yaml, vercel.json
 - ✅ Six diagrams (Mermaid sources + PNG/SVG)
-- ✅ Milestone 2 PDF content, technical report, reel script, form answers (with [TO FILL] fields)
+- ✅ Milestone 2 PDF + technical report built as PDF and Word (team-only fields highlighted: enrollment numbers, faculty, contribution, reel link, Claude results)
 - ⬜ Push to a public GitHub repository
 - ✅ Hosted prototype published (claude.ai page, no backend needed); 🟡 you must share it as "anyone with the link" and test it in incognito
 - ⬜ Optional: deploy the full stack (Render + Vercel)
-- ⬜ Real screenshots (2–3, captioned with test numbers) and the repository screenshot
-- ⬜ Record the reel
+- ✅ Real screenshots (T10, T06, T01–T14, Prompt Lab) and the repository screenshot in docs/screenshots
+- ✅ Reel recorded (102 s, captioned, real run). 🟡 Re-record Part 2 with Claude outputs after the LLM run; upload unlisted
 - ⬜ Enrollment numbers, faculty name, contribution table
 - ⬜ Replace the sample PDFs with public Bennett documents (recommended)

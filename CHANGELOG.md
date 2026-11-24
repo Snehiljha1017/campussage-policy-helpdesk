@@ -2,6 +2,13 @@
 
 All notable changes since Milestone 1. Dates are YYYY-MM-DD.
 
+## 2026-11-24 — Milestone 2 documents
+- `scripts/build_m2_docs.py` builds the Milestone 2 PDF (7 sections) and the technical report (PDF + Word) from the repository's real data.
+- Screenshots of real runs (T10, T06, T01–T14, Prompt Lab) and a repository screenshot in `docs/screenshots/`.
+- Architecture diagram of the hosted prototype; `code/` pointer folder as in the course structure; the Milestone 2 PDF is no longer git-ignored.
+- Test table extended to all 22 inputs (14 main + 8 holdout): 21 pass, H05 fails.
+- 102-second captioned reel recorded from a real run of the deployed app (uploaded separately).
+
 ## 2026-11-24 — Hosted prototype
 - `frontend/hosted/`: backend-free build of the same React app. Pipeline, guards, citation checks, metrics and chunker ported to TypeScript; Claude (via claude.ai) as the model; pdf.js uploads; per-browser storage.
 - Parity check: identical results to the Python backend on all 22 test inputs in demo mode.

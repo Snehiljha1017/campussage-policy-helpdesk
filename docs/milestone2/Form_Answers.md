@@ -19,7 +19,7 @@ Fill this in once the LLM run, deployment and reel are done; the team leader the
 | 14 | Reel length (s) | [exact seconds, 90–150] |
 | 15 | Supporting document type | Technical report |
 | 16 | Upload | AgenticMinds_TechnicalReport.pdf |
-| 17 | Number of test inputs | **14** (rows in the Section 4 test table; the 8 holdout questions are reported separately in the text. Add them to the table only if you also change this number to 22) |
+| 17 | Number of test inputs | **22** (rows in the Section 4 test table: T01–T14 + holdout H01–H08) |
 | 18 | Number of prompt versions | **3** (v1, v2, v3; v3 is the final version) |
 | 19 | Prototype status | "All modules working" **only** if every row of the Section 3 status table says Working after the live LLM run and deployment; otherwise "Some modules working" |
 | 20 | Working modules (one per line, same names as the status table) | Document ingestion / Retrieval / Question guards / Citation validation & confidence / Chat interface / Evaluation dashboard / [Answer generation (LLM), Prompt lab, Deployment, once verified] |

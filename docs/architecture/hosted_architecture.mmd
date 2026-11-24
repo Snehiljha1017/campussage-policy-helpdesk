@@ -1,0 +1,18 @@
+flowchart LR
+  subgraph Browser["Student's browser (no server)"]
+    UI["React app<br/>same pages as the full build"]
+    ENG["In-browser engine (TypeScript port)<br/>TF-IDF retrieval, rerank, guards,<br/>prompt V3, citation check, metrics"]
+    LS[("Browser storage<br/>history, uploads, runs")]
+    PDF["pdf.js<br/>PDF upload"]
+  end
+  subgraph Hosts["Static hosting"]
+    GH["GitHub Pages<br/>repo app/ folder<br/>(demo mode)"]
+    CA["claude.ai page<br/>(same build)"]
+  end
+  CL(["Claude<br/>via claude.ai runtime,<br/>viewer consent"])
+  GH --> UI
+  CA --> UI
+  UI --> ENG
+  ENG --> LS
+  UI --> PDF --> ENG
+  ENG -->|only on claude.ai, when allowed| CL

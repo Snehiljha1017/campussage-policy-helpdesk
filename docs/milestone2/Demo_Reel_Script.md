@@ -1,5 +1,10 @@
 # Demonstration reel script (target 130 s; allowed 90–150 s)
 
+> A 102-second captioned reel, recorded from a real run of the deployed app in this order, was produced on 2026-11-24
+> (`CampusSage_M2_reel.mp4`, not committed; upload it to Drive or YouTube as unlisted). Its Part 2 shows the V1 and V3
+> prompt texts and the prompts each version receives. After the Claude run, re-record Part 2 so it shows the old and new
+> **outputs** too, which is what the guideline asks for.
+
 Record the **deployed app with the LLM key set**. The guidelines give 0 for the demo part if it shows mock-up screens.
 The parts follow the order the guidelines require. Voice-over or captions; faces optional.
 Upload to Drive ("anyone with the link") or unlisted YouTube, then write down the exact length in seconds for Q14.

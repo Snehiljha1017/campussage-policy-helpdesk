@@ -1,0 +1,23 @@
+{
+  "_comment": "Team-only facts used by scripts/build_m2_docs.py. Values starting with 'TO FILL' are printed highlighted in yellow. Edit, then run: python scripts/build_m2_docs.py",
+  "faculty_name": "TO FILL: faculty name",
+  "members": [
+    {"name": "Snehil Jha", "enrollment": "TO FILL: S24CSEU____", "leader": true,
+     "role": "TO FILL: role", "tasks": "TO FILL: specific tasks done in Milestone 2", "evidence": "TO FILL: files / commits / prompt IDs", "percent": "TO FILL"},
+    {"name": "Tanya Sinha", "enrollment": "TO FILL: S24CSEU____", "leader": false,
+     "role": "TO FILL: role", "tasks": "TO FILL: specific tasks done in Milestone 2", "evidence": "TO FILL: e.g. 6 commits on 21-22 Nov 2026 (tanya385)", "percent": "TO FILL"}
+  ],
+  "batch": "B01 - B12",
+  "prototype_link": "https://snehiljha1017.github.io/campussage-policy-helpdesk/",
+  "prototype_link_llm": "https://claude.ai/artifact/WTt2vSvfwz1VMsun82qr21",
+  "repository_link": "https://github.com/Snehiljha1017/campussage-policy-helpdesk",
+  "reel_link": "TO FILL: reel link (Drive 'anyone with the link' or unlisted YouTube)",
+  "model": "Claude (via claude.ai) in the CampusSage web app",
+  "llm_results": null,
+  "_llm_results_format": {
+    "run": "e.g. Run 5, Claude via claude.ai, main suite, 3 repeats, 2026-11-25",
+    "metrics": {"v1": {"pass_rate": 0.0, "status_accuracy": 0.0, "factual_correctness": 0.0, "citation_accuracy": 0.0, "hallucination_rate": 0.0, "format_compliance": 0.0, "consistency": 0.0}},
+    "observations": {"v1": "what you saw", "v2": "", "v3": ""},
+    "sample_run": {"input": "T10 question", "output": "raw model output text"}
+  }
+}

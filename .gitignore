@@ -29,6 +29,5 @@ frontend/hosted/dist/
 secrets.*
 **/*S24CSEU*
 **/*Submission*.pdf
-**/M2_*.pdf
 **/AgenticMinds_Synopsis.pdf
 tmp/
