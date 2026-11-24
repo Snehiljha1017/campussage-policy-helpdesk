@@ -1,0 +1,7 @@
+flowchart LR
+  IN["INPUT<br/>free-text question<br/>(English or Hinglish)"] --> CS(("CampusSage"))
+  DOCS["Indexed policy PDFs"] --> CS
+  CS --> O1["Answered<br/>short answer + exact quote<br/>+ document/section + confidence"]
+  CS --> O2["Needs Clarification<br/>one clarifying question"]
+  CS --> O3["Not Covered<br/>'documents do not cover this'<br/>+ office to contact"]
+  CS --> O4["Conflicting Evidence<br/>both clauses quoted<br/>+ office to confirm"]

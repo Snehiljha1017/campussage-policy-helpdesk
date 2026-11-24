@@ -1,0 +1,44 @@
+flowchart LR
+  subgraph Client["Browser - React + TypeScript (Vercel)"]
+    L[Landing] --- D[Dashboard]
+    C[Chat] --- PL[Policy Library]
+    LAB[Prompt Lab] --- EV[Evaluation]
+  end
+  subgraph API["FastAPI backend (Render)"]
+    R1["/api/chat"]
+    R2["/api/documents"]
+    R3["/api/prompts, /api/lab"]
+    R4["/api/eval"]
+    PIPE["RAG pipeline<br/>rag/pipeline.py"]
+    ING["Ingestion<br/>extract - chunk - index"]
+    GU["Guards<br/>validation, ambiguity,<br/>evidence, privacy, injection"]
+    PR["Prompt loader<br/>prompts/v1 v2 v3 final"]
+    LLM["LLM layer<br/>LangChain -> OpenAI<br/>(or demo mode)"]
+    CV["Citation validator<br/>+ confidence cap"]
+    RUN["Evaluation runner<br/>+ metrics"]
+  end
+  subgraph Store["Storage"]
+    SQL[("SQLite<br/>documents, chunks, queries,<br/>feedback, prompt versions, runs")]
+    VEC[("ChromaDB + MiniLM embeddings<br/>or TF-IDF index")]
+    FS[("prompts/ and test-data/ files")]
+  end
+  OAI(["OpenAI API"])
+  Client -->|REST / JSON| API
+  R1 --> PIPE
+  R2 --> ING
+  R3 --> PR
+  R3 --> PIPE
+  R4 --> RUN
+  RUN --> PIPE
+  PIPE --> GU
+  PIPE --> PR
+  PIPE --> LLM
+  LLM --> OAI
+  PIPE --> CV
+  ING --> SQL
+  ING --> VEC
+  PIPE --> VEC
+  PIPE --> SQL
+  PR --> FS
+  RUN --> FS
+  RUN --> SQL

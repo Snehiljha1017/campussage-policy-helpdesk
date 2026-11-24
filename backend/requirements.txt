@@ -1,0 +1,21 @@
+# Core API + RAG (light: fits free hosting tiers such as Render's 512 MB)
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+pydantic>=2.7
+python-dotenv>=1.0
+pymupdf>=1.24
+pypdf>=4.2          # fallback extractor
+numpy>=1.26
+scikit-learn>=1.4   # TF-IDF keyword index (always used; sole index in light mode)
+
+# LLM access through LangChain (falls back to the provider SDK if missing)
+langchain-core>=0.3
+langchain-openai>=0.2
+openai>=1.40
+
+# Optional: Claude as the model (set LLM_PROVIDER=anthropic)
+# langchain-anthropic>=0.2
+
+# Tests
+pytest>=8

@@ -1,0 +1,10 @@
+flowchart LR
+  A["Student question"] --> T["User template<br/>&lt;excerpts&gt;{policy_excerpts}&lt;/excerpts&gt;<br/>&lt;question&gt;{question}&lt;/question&gt;"]
+  E["Top-5 retrieved clauses<br/>[E1] Doc - Section 2.1 (Heading)<br/>clause text"] --> T
+  S["System prompt P1 (final = V3)<br/>15 strict rules, 7-step silent procedure,<br/>confidence rubric, 2 few-shot examples"] --> M
+  T --> M["LLM (OpenAI via LangChain)<br/>temperature 0"]
+  M --> O["Text in fixed 5-label format"]
+  O --> P["Parser -> fields"]
+  P --> V["Citation validator<br/>quote + section + numbers"]
+  V --> C["Confidence cap"]
+  C --> UI["Answer card in the chat UI"]

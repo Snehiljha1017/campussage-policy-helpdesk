@@ -1,0 +1,6 @@
+flowchart LR
+  V1["V1 Baseline (Milestone 1)<br/>single user message<br/>4 rules, 4-field format<br/>temperature: default"]
+  V2["V2 Context-grounded<br/>system prompt, context restriction,<br/>no invented numbers, citations,<br/>clarification rule, Status field<br/>temperature 0.2"]
+  V3["V3 Final optimised<br/>exact quotes, section from header,<br/>contradiction + Conflicting Evidence,<br/>injection / false-assumption / Hinglish rules,<br/>confidence rubric, self-check, 2 examples<br/>temperature 0"]
+  V1 -->|status had to be guessed,<br/>quotes paraphrased| V2
+  V2 -->|conflicts resolved arbitrarily,<br/>confidence not tied to evidence| V3

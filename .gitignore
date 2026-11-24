@@ -1,7 +1,29 @@
-# Keep credentials and team-specific submission materials out of public source
+# secrets
 .env
 .env.*
 !.env.example
+!frontend/.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# runtime data (database, uploaded PDFs, vector store)
+backend/data/
+
+# node
+node_modules/
+frontend/dist/
+*.log
+.DS_Store
+
+# hosted build output (rebuild with npm run build:hosted)
+frontend/hosted/dist/
+
+# team submission material stays out of the public repo (from the earlier repo setup)
 *.pem
 *.key
 secrets.*
@@ -10,5 +32,3 @@ secrets.*
 **/M2_*.pdf
 **/AgenticMinds_Synopsis.pdf
 tmp/
-__pycache__/
-*.py[cod]

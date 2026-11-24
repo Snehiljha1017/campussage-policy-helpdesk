@@ -1,0 +1,18 @@
+flowchart TD
+  Q(["1. Student question"]) --> V{"2. Validate question"}
+  V -->|empty / gibberish| NC1["Needs Clarification:<br/>ask to rephrase"]
+  V -->|asks for another student's record| PRIV["Not Covered:<br/>privacy refusal"]
+  V -->|single ambiguous term<br/>e.g. 'deadline'| AMB["Needs Clarification:<br/>one question listing the candidate policies"]
+  V -->|instruction-like text| INJ["flag + strip injected sentence"] --> RET
+  V -->|clear| RET["3. Retrieve top candidate clauses<br/>ChromaDB embeddings + TF-IDF hybrid"]
+  RET --> RANK["4. Rerank: retrieval score + term coverage<br/>+ answer-type match"]
+  RANK --> EVC{"5. Evidence check<br/>key-term coverage"}
+  EVC -->|insufficient| NC2["Not Covered +<br/>suggested office"]
+  EVC -->|sufficient| BUILD["6. Build prompt: top-5 excerpts<br/>with document + section headers"]
+  BUILD --> SYS["7. Apply FINAL system prompt V3"]
+  SYS --> GEN["8. Generate with LLM via LangChain<br/>temperature 0"]
+  GEN --> PARSE["Parse 5 fields:<br/>Answer, Evidence, Source, Confidence, Status"]
+  PARSE --> CIT{"9. Validate citations<br/>quote found word for word?<br/>numbers present in evidence?"}
+  CIT -->|Answered but no verified quote| DECL["Decline: Not Covered<br/>'could not verify, won't guess'"]
+  CIT -->|verified| CONF["Confidence = min(model claim,<br/>evidence-based level)"]
+  CONF --> OUT(["10. Return: Answered / Needs Clarification /<br/>Not Covered / Conflicting Evidence"])

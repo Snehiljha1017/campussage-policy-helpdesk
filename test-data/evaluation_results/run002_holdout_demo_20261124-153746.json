@@ -1,0 +1,349 @@
+{
+  "run": {
+    "id": 2,
+    "suite": "holdout",
+    "mode": "demo",
+    "model": null,
+    "repeats": 1,
+    "started_at": "2026-11-24T10:07:46+00:00",
+    "finished_at": "2026-11-24T10:07:46+00:00",
+    "configs": [
+      "system"
+    ]
+  },
+  "summary": {
+    "configs": {
+      "system": {
+        "tests": 8,
+        "outputs": 8,
+        "repeats": 1,
+        "passed": 7,
+        "failed": 1,
+        "by_type": {
+          "Normal": {
+            "total": 3,
+            "passed": 3
+          },
+          "Edge": {
+            "total": 4,
+            "passed": 3
+          },
+          "Invalid": {
+            "total": 1,
+            "passed": 1
+          }
+        },
+        "metrics": {
+          "pass_rate": 0.875,
+          "status_accuracy": 0.875,
+          "factual_correctness": 0.8,
+          "citation_accuracy": 0.8,
+          "hallucination_rate": 0.0,
+          "policy_grounding": 1.0,
+          "format_compliance": 1.0,
+          "consistency": null
+        }
+      }
+    },
+    "skipped": {},
+    "mode": "demo",
+    "model": null,
+    "demo_mode": true
+  },
+  "results": [
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H01",
+      "Input": "If I get an F grade in a course, what are my options?",
+      "Type": "Normal",
+      "Expected Output": "Answered: re-register or take the supplementary exam; Academic Regulations 4.1",
+      "Actual Status": "Answered",
+      "Actual Output": "As per Academic Regulations (Sample), Section 4.1: The minimum passing grade in a course is D. A student who receives grade F must re-register for the course or appear in the supplementary examination.",
+      "Retrieved Document": "Academic Regulations (Sample) §4.1",
+      "Cited Source": "Academic Regulations (Sample) §4.1",
+      "Citation Correct": "Yes",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H02",
+      "Input": "Are electric kettles allowed in hostel rooms?",
+      "Type": "Normal",
+      "Expected Output": "Answered: not permitted; Hostel Policy 4.2",
+      "Actual Status": "Answered",
+      "Actual Output": "As per Hostel Policy (Sample), Section 4.2: Cooking appliances such as induction stoves and electric kettles are not permitted in rooms.",
+      "Retrieved Document": "Hostel Policy (Sample) §4.2",
+      "Cited Source": "Hostel Policy (Sample) §4.2",
+      "Citation Correct": "Yes",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H03",
+      "Input": "How long do I have to submit a medical certificate for attendance condonation?",
+      "Type": "Normal",
+      "Expected Output": "Answered: within 7 days of resuming classes; Attendance Policy 3.1",
+      "Actual Status": "Answered",
+      "Actual Output": "As per Attendance Policy (Sample), Section 3.1: Medical Condonation. The Dean of Academics may condone a shortfall of up to 10% (that is, down to 65% attendance) on medical grounds, if a medical certificate is submitted to the Academic Office within 7 days of resuming classes.",
+      "Retrieved Document": "Attendance Policy (Sample) §3.1",
+      "Cited Source": "Attendance Policy (Sample) §3.1",
+      "Citation Correct": "Yes",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H04",
+      "Input": "Can I get a refund if I withdraw after one month?",
+      "Type": "Edge",
+      "Expected Output": "Answered: no tuition refund after 15 days; Fee Regulations 3.1",
+      "Actual Status": "Answered",
+      "Actual Output": "As per Fee Regulations (Sample), Section 3.1: A student who withdraws within 15 days of the start of the semester is eligible for a refund of the tuition fee minus a processing charge of Rs. 10,000. No tuition fee is refunded after 15 days.",
+      "Retrieved Document": "Fee Regulations (Sample) §3.1",
+      "Cited Source": "Fee Regulations (Sample) §3.1",
+      "Citation Correct": "Yes",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H05",
+      "Input": "hostel mein raat ko kitne baje tak aana hai?",
+      "Type": "Edge",
+      "Expected Output": "Answered: by 10:00 PM; Hostel Policy 2.1",
+      "Actual Status": "Not Covered",
+      "Actual Output": "The provided policy documents do not cover this question. Please contact the Hostel Office (Warden).",
+      "Retrieved Document": "Hostel Policy (Sample) §5.1",
+      "Cited Source": "-",
+      "Citation Correct": "No",
+      "Pass/Fail": "Fail",
+      "Failure Reasons": "status 'Not Covered', expected Answered; expected clause not among verified citations; missing fact: 10:00 PM / 10 PM / 10:00 pm"
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H06",
+      "Input": "What is the fee?",
+      "Type": "Edge",
+      "Expected Output": "Needs Clarification: which fee",
+      "Actual Status": "Needs Clarification",
+      "Actual Output": "Which fee do you mean? For example: Payment Schedule (Fee Regulations); Refunds (Fee Regulations); Hostel Fee (Hostel Policy); Late Payment (Fee Regulations).",
+      "Retrieved Document": "-",
+      "Cited Source": "-",
+      "Citation Correct": "n/a",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H07",
+      "Input": "What is the WiFi password for the library?",
+      "Type": "Invalid",
+      "Expected Output": "Not Covered",
+      "Actual Status": "Not Covered",
+      "Actual Output": "The provided policy documents do not cover this question. Please contact the Library.",
+      "Retrieved Document": "General Notice GN/2026/014 (Sample) §2.1",
+      "Cited Source": "-",
+      "Citation Correct": "n/a",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    },
+    {
+      "Config": "system",
+      "Repeat": 1,
+      "Test ID": "H08",
+      "Input": "Is there a dress code for students on campus?",
+      "Type": "Edge",
+      "Expected Output": "Not Covered: documents do not mention a dress code",
+      "Actual Status": "Not Covered",
+      "Actual Output": "This question is outside the university policy documents CampusSage has. I can help with attendance, examinations, fees, hostel and academic rules. For anything else, contact the Student Welfare Office.",
+      "Retrieved Document": "Attendance Policy (Sample) §5.1",
+      "Cited Source": "-",
+      "Citation Correct": "n/a",
+      "Pass/Fail": "Pass",
+      "Failure Reasons": ""
+    }
+  ],
+  "raw_outputs": [
+    {
+      "config": "system",
+      "test_id": "H01",
+      "repeat_idx": 0,
+      "raw_output": "Answer:\nAs per Academic Regulations (Sample), Section 4.1: The minimum passing grade in a course is D. A student who receives grade F must re-register for the course or appear in the supplementary examination.\n\nSupporting Evidence:\n\"The minimum passing grade in a course is D. A student who receives grade F must re-register for the course or appear in the supplementary examination.\"\n\nSource:\nAcademic Regulations (Sample), Section 4.1\n\nConfidence:\nLow\n\nStatus:\nAnswered",
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": true,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": true,
+        "hallucination": false,
+        "grounded": true,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "Academic Regulations (Sample) §4.1",
+        "cited_source": "Academic Regulations (Sample) §4.1"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H02",
+      "repeat_idx": 0,
+      "raw_output": "Answer:\nAs per Hostel Policy (Sample), Section 4.2: Cooking appliances such as induction stoves and electric kettles are not permitted in rooms.\n\nSupporting Evidence:\n\"Cooking appliances such as induction stoves and electric kettles are not permitted in rooms.\"\n\nSource:\nHostel Policy (Sample), Section 4.2\n\nConfidence:\nLow\n\nStatus:\nAnswered",
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": true,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": true,
+        "hallucination": false,
+        "grounded": true,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "Hostel Policy (Sample) §4.2",
+        "cited_source": "Hostel Policy (Sample) §4.2"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H03",
+      "repeat_idx": 0,
+      "raw_output": "Answer:\nAs per Attendance Policy (Sample), Section 3.1: Medical Condonation. The Dean of Academics may condone a shortfall of up to 10% (that is, down to 65% attendance) on medical grounds, if a medical certificate is submitted to the Academic Office within 7 days of resuming classes.\n\nSupporting Evidence:\n\"Medical Condonation. The Dean of Academics may condone a shortfall of up to 10% (that is, down to 65% attendance) on medical grounds, if a medical certificate is submitted to the Academic Office within 7 days of resuming classes.\"\n\nSource:\nAttendance Policy (Sample), Section 3.1\n\nConfidence:\nLow\n\nStatus:\nAnswered",
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": true,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": true,
+        "hallucination": false,
+        "grounded": true,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "Attendance Policy (Sample) §3.1",
+        "cited_source": "Attendance Policy (Sample) §3.1"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H04",
+      "repeat_idx": 0,
+      "raw_output": "Answer:\nAs per Fee Regulations (Sample), Section 3.1: A student who withdraws within 15 days of the start of the semester is eligible for a refund of the tuition fee minus a processing charge of Rs. 10,000. No tuition fee is refunded after 15 days.\n\nSupporting Evidence:\n\"A student who withdraws within 15 days of the start of the semester is eligible for a refund of the tuition fee minus a processing charge of Rs. 10,000. No tuition fee is refunded after 15 days.\"\n\nSource:\nFee Regulations (Sample), Section 3.1\n\nConfidence:\nLow\n\nStatus:\nAnswered",
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": true,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": true,
+        "hallucination": false,
+        "grounded": true,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "Fee Regulations (Sample) §3.1",
+        "cited_source": "Fee Regulations (Sample) §3.1"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H05",
+      "repeat_idx": 0,
+      "raw_output": null,
+      "checks_json": {
+        "passed": false,
+        "status_ok": false,
+        "citation_correct": false,
+        "include_ok": false,
+        "exclude_ok": true,
+        "has_required_facts": true,
+        "hallucination": false,
+        "grounded": null,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [
+          "status 'Not Covered', expected Answered",
+          "expected clause not among verified citations",
+          "missing fact: 10:00 PM / 10 PM / 10:00 pm"
+        ],
+        "retrieved_doc": "Hostel Policy (Sample) §5.1",
+        "cited_source": "-"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H06",
+      "repeat_idx": 0,
+      "raw_output": null,
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": null,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": false,
+        "hallucination": false,
+        "grounded": null,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "-",
+        "cited_source": "-"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H07",
+      "repeat_idx": 0,
+      "raw_output": null,
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": null,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": false,
+        "hallucination": false,
+        "grounded": null,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "General Notice GN/2026/014 (Sample) §2.1",
+        "cited_source": "-"
+      }
+    },
+    {
+      "config": "system",
+      "test_id": "H08",
+      "repeat_idx": 0,
+      "raw_output": null,
+      "checks_json": {
+        "passed": true,
+        "status_ok": true,
+        "citation_correct": null,
+        "include_ok": true,
+        "exclude_ok": true,
+        "has_required_facts": false,
+        "hallucination": false,
+        "grounded": null,
+        "format_ok": true,
+        "unsupported_numbers": [],
+        "reasons": [],
+        "retrieved_doc": "Attendance Policy (Sample) §5.1",
+        "cited_source": "-"
+      }
+    }
+  ]
+}

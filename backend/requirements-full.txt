@@ -1,0 +1,6 @@
+# Full semantic retrieval: ChromaDB + sentence-transformers embeddings.
+# Needs ~1.5 GB of disk (PyTorch) and >1 GB RAM. Recommended for local runs
+# and for the Milestone 2 evaluation. The app detects these automatically.
+-r requirements.txt
+chromadb>=0.5
+sentence-transformers>=3.0
