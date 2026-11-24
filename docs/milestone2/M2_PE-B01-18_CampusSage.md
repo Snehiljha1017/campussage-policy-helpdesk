@@ -586,55 +586,56 @@ Type: **Technical report**, uploaded separately as `AgenticMinds_TechnicalReport
 **Team Agentic Minds (PE-B01-18) · SCSE4041 Prompt Engineering · Bennett University · Technical report**
 
 ### 1. Purpose
-CampusSage answers students' questions about attendance, examinations, fees, hostel and academic rules using only
-official policy documents. The main requirement is reliability. Every answer must quote the exact clause and cite its
-section. It must abstain when the documents are silent, ask when a question is ambiguous, and report contradictions
-between documents instead of silently picking one.
+Students lose time, and sometimes money, because the rules they need are buried in long PDFs and notices, and asking
+a senior often gets a confident but wrong answer. CampusSage answers from the policy documents alone, and what mattered
+most to us was trust: every answer quotes the exact clause and its section. When the documents are silent it says so,
+when a question is vague it asks, and when two documents disagree it says that instead of quietly picking one.
 
 ### 2. Architecture and tools
-React + TypeScript single-page app (Tailwind, Framer Motion, Recharts) with a FastAPI REST backend.
-**Ingestion:** PyMuPDF extraction (pypdf fallback), header/footer removal, chunking on numbered clauses so each chunk
-keeps its section number, then SQLite storage. **Retrieval:** TF-IDF over word and character n-grams (ChromaDB +
-all-MiniLM-L6-v2 optional), followed by a reranker that combines retrieval score, key-term coverage and answer type.
-**Pipeline (10 steps):** validate → retrieve → rerank → evidence check → build prompt → system prompt → generate →
-parse → validate citations → return or decline. **Model:** Claude (via claude.ai) in the CampusSage web app; the backend uses LangChain (OpenAI by
-default). **Hosting:** a backend-free build (the same pipeline ported to TypeScript, parity-checked on all 22
-inputs) on GitHub Pages and claude.ai.
+A React + TypeScript front end (Tailwind, Framer Motion, Recharts) runs on a FastAPI back end. Uploaded PDFs are read
+with PyMuPDF (pypdf as a fallback), cleaned of headers and footers, split on their numbered clauses so each chunk keeps
+its section number, and stored in SQLite. Questions are matched with TF-IDF over words and character n-grams (ChromaDB
+optional), and a reranker prefers clauses that cover the key terms. A ten-step pipeline validates, retrieves, reranks,
+checks the evidence, builds the prompt, adds the system prompt, generates, parses, verifies citations and then answers or
+declines. The model is
+Claude (via claude.ai) in the CampusSage web app, reached through LangChain in the back end. So anyone can try it without a server or API key, we ported
+the pipeline to TypeScript (same results on all 22 test inputs) and host it on GitHub Pages and claude.ai.
 
 ### 3. Prompt design
-One LLM prompt, **P1 Policy Answer**, does the language work, and code handles what must never vary. Before the model
-is called: empty or gibberish input, a single ambiguous term, requests for another student's records, and questions
-whose key terms are less than 50% covered by the retrieved clauses (the system abstains and names an office). After the
-model answers: each quotation must match a retrieved clause at 90% or more, every number must appear in the evidence,
-unverifiable answers are withheld, and confidence = min(model's claim, evidence level).
-Iteration: **V1** (Milestone 1 baseline: one message, 4 rules, no status) → **V2** (system prompt, context restriction,
-no invented numbers, document + section citation, clarification rule, Status field) → **V3** (exact quotations,
-section from the excerpt header, Conflicting Evidence status, injection, false-assumption and Hinglish rules,
-confidence rubric, silent 7-step procedure with a self-check, 2 few-shot examples).
+We gave the model one job: a single prompt, **P1 Policy Answer**, reads the excerpts, answers, quotes the clause and
+labels the status. Whatever must never vary is done in code. Before the model runs, code catches gibberish, a lone
+ambiguous word, requests for another student's records, and questions less than half covered by the retrieved clauses
+(CampusSage then declines and names an office). Afterwards, each quotation must match a clause at 90% or more, every
+number must appear in the evidence, unverifiable answers are held back, and confidence never exceeds the evidence.
+The prompt went through three versions. **V1**, our Milestone 1 baseline, was one message with four rules and no
+status. **V2** moved the rules into a system prompt, kept answers to the excerpts, banned invented numbers and added a
+Status field. **V3**, the final version, asks for word-for-word quotations, adds a Conflicting Evidence status and rules
+for injected instructions, false assumptions and Hinglish, scores confidence with a rubric, and gives two worked examples.
 
 ### 4. Test results
-22 inputs (14 edge/invalid) with pass criteria checked by code. H01–H08 were written after tuning and never
-used to tune. The prompt comparison is a live Claude run (claude.ai, 24 Nov 2026, 1 repeat) with identical retrieval for
-every version.
+We wrote 22 test inputs (14 edge or invalid), and code, not our judgement, decides pass or fail. The holdout
+questions H01–H08 were written after tuning. To compare prompts fairly, we ran V1, V2 and V3 live on Claude (claude.ai,
+24 Nov 2026, one repeat) with the same retrieved excerpts, so only the prompt changed.
 
-| Configuration | Pass | Status acc. | Citation acc. | Hallucination | Format |
-|---|---|---|---|---|---|
-| System, main suite, demo mode | 14/14 | 100% | 100% | 0% | 100% |
-| System, holdout, demo mode | 7/8 | 88% | 80% | 0% | 100% |
-| System (V3 + guards), main, Claude | 14/14 | 100% | 100% | 0% | 100% |
-| V1 prompt, main, Claude | 9/14 | 86% | 50% | 29% | 7% |
-| V2 prompt, main, Claude | 13/14 | 93% | 100% | 0% | 100% |
-| V3 prompt, main, Claude | 14/14 | 100% | 100% | 0% | 100% |
+| Configuration (main = 14 tests, holdout = 8) | Pass | Status acc. | Citation acc. | Hallucination | Format |
+|------------|---|---|---|---|---|
+| Full system, main, demo mode | 14/14 | 100% | 100% | 0% | 100% |
+| Full system, holdout, demo mode | 7/8 | 88% | 80% | 0% | 100% |
+| Full system, main, Claude | 14/14 | 100% | 100% | 0% | 100% |
+| V1 prompt alone, main, Claude | 9/14 | 86% | 50% | 29% | 7% |
+| V2 prompt alone, main, Claude | 13/14 | 93% | 100% | 0% | 100% |
+| V3 prompt alone, main, Claude | 14/14 | 100% | 100% | 0% | 100% |
 
-Eight unit tests check the code around the model using a stand-in model: a fabricated quotation and an invented "60%" are
-detected, and the answer is withheld.
+Most of the gain came from the output format and the conflict rule: V1 had no status, answered a vague question
+instead of asking and settled the late-fee conflict itself, while V3 passed all fourteen. Eight unit tests also confirm
+that a made-up quotation or an invented "60%" is caught and the answer withheld.
 
 ### 5. Limitations
-Five known limits. First, Hinglish words outside the built-in vocabulary defeat the keyword evidence check (holdout H05 failed). Second, thresholds
-were tuned on the main suite, so the holdout score is the fairer estimate. Third, the documents are labelled samples, not
-official policy. Fourth, there is no OCR and no document dating. Fifth, the Claude comparison is one run, and claude.ai
-does not let the page set a temperature. Next: LLM query rewriting, a separate development set, repeated runs at a fixed
-temperature, Bennett's public documents, OCR and document versioning.
+We know of five weak spots. Hinglish words outside our small vocabulary still defeat the evidence check (holdout H05
+failed). Thresholds were tuned on the main suite, so the holdout score is the fairer estimate. The documents are
+labelled samples, not official policy. There is no OCR, and without document dates a newer notice cannot yet replace
+an older clause. And the Claude comparison is a single run, with no control over temperature on claude.ai. Next: query
+rewriting, a separate development set, repeated runs at a fixed temperature, Bennett's public documents and OCR.
 
 
 # 7 Team contribution
